@@ -25,15 +25,8 @@ internal object ApiModule {
 
     @Provides
     @Singleton
-    fun provideCache(application: Application): Cache {
-        return Cache(application.cacheDir, 10L * 1024 * 1024)
-    }
-
-    @Provides
-    @Singleton
-    fun provideOkHttpClient(cache: Cache): OkHttpClient {
+    fun provideOkHttpClient(): OkHttpClient {
         return OkHttpClient.Builder().apply {
-            cache(cache)
             connectTimeout(CONNECT_TIMEOUT, TimeUnit.SECONDS)
             writeTimeout(WRITE_TIMEOUT, TimeUnit.SECONDS)
             readTimeout(READ_TIMEOUT, TimeUnit.SECONDS)
